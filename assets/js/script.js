@@ -19,7 +19,12 @@ var exampleArray = []
 // var cryptoTicker = document.querySelector('.crypto-ticker').value
 // var timeFrame = document.querySelector('.date').value
 
-var requestUrl = 'https://api.binance.com/api/v3/klines?symbol=ETHBTC&interval=1d&startTime=1647316800000&endTime=1649908800000'
+var requestUrl = 'https://api.binance.com/api/v3/klines?symbol=ETHBTC&interval=1d&startTime=1641013200000&endTime=1649908800000'
+
+function init() {
+    getAPI()
+}
+
 
 function getAPI() {
     fetch(requestUrl)
@@ -34,16 +39,8 @@ function getAPI() {
             low.push(parseFloat(data[i][3]))
             cls.push(parseFloat(data[i][4]))
         }
-        console.log(x, opn, high, low, cls)
-        d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv', function(err, rows){
-
-        function unpack(rows, key) {
-        return rows.map(function(row) {
-            return row[key];
-        });
-        }
-
-        var trace = {
+      
+        var trace1 = {
         x: x,
         close: cls,
         high: high,
@@ -59,7 +56,7 @@ function getAPI() {
         yaxis: 'y'
         };
 
-        var data = [trace];
+        var data = [trace1];
 
         var layout = {
         dragmode: 'zoom',
@@ -91,12 +88,12 @@ function getAPI() {
         yaxis: {
             autorange: true,
         }
-        };
+    };
 
-        Plotly.newPlot('myDiv', data, layout);
-        });
+    Plotly.newPlot('myDiv', data, layout);
     });
-}
+};
+
 
 
 
@@ -123,21 +120,21 @@ function getAPI() {
 
 
 
-function buildArrays(exampleArray) {
-    for (let i = 0; i < exampleArray.length; i++) {
-        x.push(new Date(exampleArray[i][0]).toLocaleDateString("en-US"))
-        opn.push(parseFloat(exampleArray[i][1]))
-        high.push(parseFloat(exampleArray[i][2]))
-        low.push(parseFloat(exampleArray[i][3]))
-        cls.push(parseFloat(exampleArray[i][4]))
-    }
-    console.log(x)
-    console.log(opn)
-    console.log(high)
-    console.log(low)
-    console.log(cls)
-    console.log(exampleArray)
-}
+// function buildArrays(exampleArray) {
+//     for (let i = 0; i < exampleArray.length; i++) {
+//         x.push(new Date(exampleArray[i][0]).toLocaleDateString("en-US"))
+//         opn.push(parseFloat(exampleArray[i][1]))
+//         high.push(parseFloat(exampleArray[i][2]))
+//         low.push(parseFloat(exampleArray[i][3]))
+//         cls.push(parseFloat(exampleArray[i][4]))
+//     }
+//     console.log(x)
+//     console.log(opn)
+//     console.log(high)
+//     console.log(low)
+//     console.log(cls)
+//     console.log(exampleArray)
+// }
 
 
 // console.log(x)
@@ -152,6 +149,5 @@ function buildArrays(exampleArray) {
 
 
 
-exampleArray = getAPI()
-console.log(exampleArray)
+init()
 // buildArrays()
