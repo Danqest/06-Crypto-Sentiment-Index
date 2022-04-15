@@ -1,144 +1,57 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title class="is-size-1 has-text-weight-bold has-text-centered has-font-family-sans-serif">Crypto Sentimental Index</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
+    <title>Foundation for Sites</title>
+    <link rel="stylesheet" href="./assets/css/foundation.css">
+    <link rel="stylesheet" href="./assets/css/app.css">
+  </head>
 <body>
-    <h1 class="is-size-2 has-text-weight-bold has-text-centered">Hello!<h1>
-    <h2 class="is-size-1 has-text-weight-bold has-text-centered">Search for Crypto<h2>    
-    
-    <form id="form">
-        <input type="search" id="query" name="q"
-     placeholder="Search"
-     aria-label="Search through site content">
-         <button>Search</button>
-    </form>  
-
-    <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
-        <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-            <a href="#">Link 4</a>
+    div.
+        <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit data-use-m-u-i="false">
+            <div class="orbit-wrapper">
+            <div class="orbit-controls">
+                <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+                <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+            </div>
+            <ul class="orbit-container">
+                <li class="is-active orbit-slide">
+                <figure class="orbit-figure">
+                    <img class="orbit-image" src="./assets/Screen Shot 03-24-22 at 10.14 PM 001.PNG" alt="Space">
+                    <figcaption class="orbit-caption">Space, the final frontier.</figcaption>
+                </figure>
+                </li>
+                <li class="orbit-slide">
+                <figure class="orbit-figure">
+                    <img class="orbit-image" src="./assets/Screen Shot 03-24-22 at 10.14 PM.PNG" alt="Space">
+                    <figcaption class="orbit-caption">Lets Rocket!</figcaption>
+                </figure>
+                </li>
+                <li class="orbit-slide">
+                <figure class="orbit-figure">
+                    <img class="orbit-image" src="./assets/Screen Shot 03-29-22 at 08.39 PM.PNG" alt="Space">
+                    <figcaption class="orbit-caption">Encapsulating</figcaption>
+                </figure>
+                </li>
+            </ul>
+            </div>
+            <nav class="orbit-bullets">
+            <button class="is-active" data-slide="0">
+                <span class="show-for-sr">First slide details.</span>
+                <span class="show-for-sr" data-slide-active-label>Current Slide</span>
+            </button>
+            <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+            <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+            
+            </nav>
+      
     </div>
-
-    <script src="./assets/js/script.js"></script>
-</body>
-</html> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Sentimental Index</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <script src='https://cdn.plot.ly/plotly-2.11.1.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
-    <script src="./assets/js/script.js"></script>
-</head>
-<body>
-    <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
-    <!--Headings with popular crypto and tagnames(LANDING PAGE)-->
-    <h1>WELCOME TO CRYPTO SENTIMENT INDEX</h1>
-    &nbsp;
-
-    <h2>Popular Crypto</h2>
-        <p>Bitcoin(BTC) Ethereum(ETH) Tether(USDT) Binance Coin(BNB) USD Coin(USDC) </p>
-    &nbsp;
-
-    <h4>UP AND COMERS</h4>
-    <p>XRP(XRP) Cardano(ADA) Solana(SOL) </p>
-    &nbsp;
-
-
-    <!--About Crypto-->
-    <h6><strong>About Crypto</strong></h6>
-    
-    <p>At its core, cryptocurrency is typically decentralized digital money designed to be used over the internet. 
-        Bitcoin, which launched in 2008, was the first cryptocurrency, and it remains by far the biggest, most influential, and best-known. 
-        In the decade since, Bitcoin and other cryptocurrencies like Ethereum have grown as digital alternatives to money issued by governments.
-    </p>
-    &nbsp;
-
-    <ul>
-        <li>The most popular cryptocurrencies, by market capitalization, are Bitcoin, Ethereum, Bitcoin Cash and Litecoin. Other well-known cryptocurrencies include
-             Tezos, EOS, and ZCash. Some are similar to Bitcoin. Others are based on different technologies, or have new features that allow them to do more than transfer value.</li>
-        <li>Crypto makes it possible to transfer value online without the need for a middleman like a bank or payment processor, allowing
-             value to transfer globally, near-instantly, 24/7, for low fees.</li>
-        <li>Cryptocurrencies are usually not issued or controlled by any government or other central authority. 
-            They’re managed by peer-to-peer networks of computers running free, open-source software. Generally, anyone who wants to participate is able to.</li>
-        <li>If a bank or government isn’t involved, how is crypto secure? It’s secure because all transactions are vetted by a technology called a blockchain.</li>
-        <li>A cryptocurrency blockchain is similar to a bank’s balance sheet or ledger. Each currency has its own blockchain, 
-            which is an ongoing, constantly re-verified record of every single transaction ever made using that currency.</li>
-        <li>Unlike a bank’s ledger, a crypto blockchain is distributed across participants of the digital currency’s entire network</li>
-        <li>No company, country, or third party is in control of it; and anyone can participate. 
-            A blockchain is a breakthrough technology only recently made possible through decades of computer science and mathematical innovations.</li>
-    </ul>
-    &nbsp;
-
-
-    <table>
-        <thead>
-            <tr>
-                <th>name</th>
-                <th>email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Fredrick Jordan</td>
-                <td>alexjordan025@gmail.com</td>
-            </tr>
-            <tr>
-                <td>Raul Rangel</td>
-                <td>raulanrangel07@gmail.com</td>
-            </tr>
-            <tr>
-                <td>David Cho</td>
-                <td>dcho9917@gmail.com</td>
-            </tr>
-            <tr>
-                <td>Colin Brooks</td>
-                <td>mcbrooks@pm.me</td>
-            </tr>
-
-        </tbody>
-    </table>
-
-    
-
-
-    
-
-
-
-   
-
-
-
-</body>
+    <script src="./assets/js/vendor/jquery.js"></script>
+    <script src="./assets/js/vendor/what-input.js"></script>
+    <script src="./assets/js/vendor/foundation.js"></script>
+    <script src="./assets/js/app.js"></script>
+  </body>
 </html>

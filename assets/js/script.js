@@ -155,3 +155,75 @@ var layout = {
 
 Plotly.newPlot('myDiv', data, layout);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getNews(){
+  var newsUrl= 'https://newsapi.org/v2/top-headlines?q=bitcoin&apiKey=344b5da3ce6a48f7b3fca00ca66557c8';
+  fetch(newsUrl)
+  .then(function (response){
+      if (response){
+        return response.json();
+      }
+  }).then (function (data){
+    console.log(data);
+  })
+}
+
+getNews();
