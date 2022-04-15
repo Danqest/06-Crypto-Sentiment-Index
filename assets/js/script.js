@@ -19,7 +19,7 @@ var exampleArray = []
 // var cryptoTicker = document.querySelector('.crypto-ticker').value
 // var timeFrame = document.querySelector('.date').value
 
-var requestUrl = 'https://api.binance.com/api/v3/klines?symbol=ETHBTC&interval=1d&startTime=1641013200000&endTime=1649908800000'
+var requestUrl = 'https://api.binance.com/api/v3/klines?symbol=ETHBTC&interval=1d&startTime=1618286400000&endTime=1649908800000'
 
 function init() {
     getAPI()
