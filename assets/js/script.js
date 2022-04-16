@@ -19,7 +19,7 @@ var exampleArray = []
 // var cryptoTicker = document.querySelector('.crypto-ticker').value
 // var timeFrame = document.querySelector('.date').value
 
-var requestUrl = 'https://api.binance.com/api/v3/klines?symbol=ETHBTC&interval=1d&startTime=1618286400000&endTime=1649908800000'
+var requestUrl = 'https://api.binance.com/api/v3/klines?symbol=BTCBUSD&interval=1d&startTime=1618286400000&endTime=1649908800000'
 
 function init() {
     getAPI()
@@ -59,38 +59,21 @@ function getAPI() {
         var data = [trace1];
 
         var layout = {
-        dragmode: 'zoom',
-        showlegend: false,
-        xaxis: {
-            autorange: true,
-            title: 'Date',
-            rangeselector: {
-                x: 0,
-                y: 1.2,
-                xanchor: 'left',
-                font: {size:8},
-                buttons: [{
-                    step: 'month',
-                    stepmode: 'backward',
-                    count: 1,
-                    label: '1 month'
-                }, {
-                    step: 'month',
-                    stepmode: 'backward',
-                    count: 6,
-                    label: '6 months'
-                }, {
-                    step: 'all',
-                    label: 'All dates'
-                }]
-            }
-        },
-        yaxis: {
-            autorange: true,
-        }
-    };
+            dragmode: 'zoom',
+            showlegend: false,
+            xaxis: {
+                autorange: true,
+                title: 'Date',
 
-    Plotly.newPlot('myDiv', data, layout);
+            },
+            yaxis: {
+                autorange: true,
+            },
+            width: 1344,
+            height: 750,
+        };
+
+    Plotly.newPlot('myDiv', data, layout, {staticPlot:true});
     });
 };
 
