@@ -68,3 +68,8 @@ form:hover input {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
 }
+
+.container{
+    outline-style: solid;
+    border-style: solid;
+}
