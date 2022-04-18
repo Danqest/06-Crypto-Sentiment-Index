@@ -262,7 +262,7 @@ var arrayNews=[];
 
 
 function getNews(evt){ // this needs to be invoked in an event listener for the button submit
-  evt.preventDefault();
+  // evt.preventDefault();
   var newsUrl;
   var date;
   var daysTilEnd= endDate.diff(startDate,'days');;
@@ -272,7 +272,7 @@ function getNews(evt){ // this needs to be invoked in an event listener for the 
     console.log(date)
     newsUrl= `https://cryptonews-api.com/api/v1?tickers=BTC&items=50&page=1&date=${date}-${date}&token=mbtk43afu0okyrzuc6feftmukl2zvrujlhv9nxdv`;
     console.log(newsUrl)
-    // fetchUrl(newsUrl,date);   this is comented out so we can prevent fetching the API unnecesarily
+    fetchUrl(newsUrl,date);   //this is comented out so we can prevent fetching the API unnecesarily
   }
 }
 
@@ -280,7 +280,7 @@ function fetchUrl(url,date){
   var result= new articles("","",'')
   // var page= url.split('&page=');
   // page=page[1].split('&')[0]
-  console.log(page);
+  // console.log(page);
   fetch(url)
   .then(function (response){
       if (response){
@@ -311,7 +311,8 @@ function fetchUrl(url,date){
       // console.log(result);
     // }
     if(data.total_pages>1){
-      result.numOfArti= ((data.data.length)-1)*50+25; // I added only for the last page, given the case that we have 2 or more, because is the median 
+      result.numOfArti= ((data.total_pages)-1)*50+25; // I added only for the last page, given the case that we have 2 or more, because is the median 
+      console.log(result);
     } else{
       result.numOfArti= data.data.length; //In case is only one page long we get the number of articles from the length of the array
       console.log(result);
@@ -341,7 +342,7 @@ function setEventListeners(){
 }
 
 function init(){
-  setEventListeners();
+  // setEventListeners();
   getStoredArticles();
   if (!arrayNews){ //we check arrayNews because the function 'getStoredArticles' assigns all the possible values stored to that variable
     arrayNews=[]; //doing this we avoid arrayNews being equal to undefined.
@@ -351,3 +352,4 @@ function init(){
 }
 
 init();
+getNews();

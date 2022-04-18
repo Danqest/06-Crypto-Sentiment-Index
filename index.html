@@ -6,14 +6,85 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foundation for Sites</title>
+    <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> -->
     <link rel="stylesheet" href="./assets/css/foundation.css">
     <link rel="stylesheet" href="./assets/css/app.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   </head>
 <body>
 
+    <aside class='grid-x'>
+        <ul class="accordion cell large-4" data-accordion>
+            <li class="accordion-item is-active" data-accordion-item>
+              <!-- Accordion tab title -->
+              <a href="#" class="accordion-title">Ticker</a>
+          
+              <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
+              <div class="accordion-content" data-tab-content>
+                <p>Panel 1. Lorem ipsum dolor</p>
+              </div>
+            </li>
+
+            <li class="accordion-item" data-accordion-item>
+                <!-- Accordion tab title -->
+                <a href="#" class="accordion-title">Date Interval</a>
+            
+                <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
+                <div class="accordion-content " data-tab-content>
+                    <div clas='accordion-content' style="display: block;">
+                        <input type="date" style="position: relative;">
+                    </div>
+                </div>
+              </li>
+            <!-- ... -->
+          </ul>
+          
+    </aside>
+
+
     
+<div class="row">
+    <div class="columns">
+      <h2>Accordion</h2>
+      <p>Accordions lets you organize and navigate multiple documents in a single container. Highly useful for switching between items in the container specially when you have a large amount of content.</p>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="columns">
+      <ul class="accordion" data-accordion>
+    <li class="accordion-item is-active" data-accordion-item>
+      <a href="#" class="accordion-title">Accordion 1</a>
+      <div class="accordion-content" data-tab-content >
+        <p>Panel 1. Lorem ipsum dolor</p>
+        <a href="#">Nowhere to Go</a>
+      </div>
+    </li>
+    <li class="accordion-item" data-accordion-item>
+      <a href="#" class="accordion-title">Accordion 2</a>
+      <div class="accordion-content" data-tab-content>
+        <textarea></textarea>
+        <button class="button">I do nothing!</button>
+      </div>
+    </li>
+    <li class="accordion-item" data-accordion-item>
+      <a href="#" class="accordion-title">Accordion 3</a>
+      <div class="accordion-content" data-tab-content>
+        <div class="card align-self-middle" style="width: 300px;">
+            <div class="card-divider">
+            This is a header
+            </div>
+            <div class="card-section">
+                <h4>This is a card.</h4>
+                <p>It has an easy to override visual style, and is appropriately subdued.</p>
+                <input type="date">
+            </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+    </div>
+  </div>
     <div class="grid-x">
         <div class="orbit cell large-4 flex-container flex-dir-column " role="region" aria-label="Favorite Space Pictures" data-orbit data-use-m-u-i="false">
             <div class="orbit-wrapper">
@@ -68,12 +139,14 @@
       
         </div>
     </div>
-
-    <script src="./assets/js/vendor/jquery.js"></script>
-    <script src="./assets/js/vendor/what-input.js"></script>
-    <script src="./assets/js/vendor/foundation.js"></script>
-    <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/script.js"></script>
-    
-  </body>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+<script src="./assets/js/vendor/jquery.js"></script>
+<script src="./assets/js/vendor/what-input.js"></script>
+<script src="./assets/js/vendor/foundation.js"></script>
+<script src="./assets/js/vendor/app.js"></script>
+<script src="./assets/js/scriptNews.js"></script>
 </html>
