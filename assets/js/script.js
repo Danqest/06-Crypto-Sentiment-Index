@@ -1,5 +1,3 @@
-
-
 // All endpoints return either a JSON object or array.
 // Data is returned in ascending order. Oldest first, newest last.
 // All time and timestamp related fields are in milliseconds.
@@ -15,13 +13,18 @@ var high = []
 var low = []
 var cls = []
 var exampleArray = []
+var arrayNews = []
+var newsX = []
+var newsY = []
+var trimArticles = []
 
 // var cryptoTicker = document.querySelector('.crypto-ticker').value
 // var timeFrame = document.querySelector('.date').value
 
-var requestUrl = 'https://api.binance.com/api/v3/klines?symbol=BTCBUSD&interval=1d&startTime=1641013200000&endTime=1649908800000'
+var requestUrl = 'https://api.binance.com/api/v3/klines?symbol=BTCBUSD&interval=1d&startTime=1641013200000&endTime=1650340800000'
 
 function init() {
+    // getStoredArticles()
     getAPI()
 }
 
@@ -32,13 +35,26 @@ function getAPI() {
       return response.json();
     })
     .then(function (data) {
-        for (let i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             x.push(new Date(data[i][0]).toLocaleDateString("en-US"))
             opn.push(parseFloat(data[i][1]))
             high.push(parseFloat(data[i][2]))
             low.push(parseFloat(data[i][3]))
             cls.push(parseFloat(data[i][4]))
         }
+        
+        arrayNews = JSON.parse(localStorage.getItem('historicArticles'));
+
+
+        for (var j = 0; j < arrayNews.length; j++) {
+            var newsDate = arrayNews[j].date
+            var newsCount = arrayNews[j].numOfArti
+            newsX.push(newsDate)
+            newsY.push(newsCount)
+            trimArticles.push([newsDate, newsCount])
+        }
+        
+        trimArticles.sort(function(a, b) {return a[0]-b[0]})
       
         var trace1 = {
         x: x,
@@ -56,18 +72,44 @@ function getAPI() {
         yaxis: 'y'
         };
 
-        var data = [trace1];
+        var trace2 = {
+            x: x,
+            y: newsY,
+
+            mode: 'lines+markers',
+            xaxis: 'x2',
+            yaxis: 'y2',
+            line: {
+                color: 'blue'
+            }
+        }
+
+        var data = [trace1, trace2]
 
         var layout = {
-            dragmode: 'zoom',
             showlegend: false,
+            grid: {
+                rows: 2,
+                columns: 1,
+                pattern: 'independent',
+                roworder: 'top to bottom',
+            },
             xaxis: {
-                autorange: true,
-                title: 'Date',
-
+                // title: 'Date',
+                rangeslider: {
+                    visible: false
+                }
             },
             yaxis: {
-                autorange: true,
+                title: 'Price',
+                autorange: 'true'
+            },
+            xaxis2: {
+                matches: 'x'
+            },
+            yaxis2: {
+                title: 'Article Count',
+                color: 'blue',
             },
             width: 1344,
             height: 750,
@@ -127,10 +169,30 @@ function getAPI() {
 // console.log(cls)
 // console.log(exampleArray)
 
+// function getStoredArticles(){
+//     arrayNews = JSON.parse(localStorage.getItem('historicArticles'));
+//   }
+
+
+// arrayNews = JSON.parse(localStorage.getItem('historicArticles'));
+
+
+// for (var i = 0; i < arrayNews.length; i++) {
+//     var dataDate = arrayNews[i].date
+//     var dataCount = arrayNews[i].numOfArti
+//     trimArticles.push([dataDate, dataCount])
+// }
+// trimArticles = trimArticles.sort(function(a, b){return a[0]-b[0]})
 
 
 
-
+// console.log(trimArticles)
 
 init()
-// buildArrays()
+
+// for (let i = 0; i < trimArticles.length; i++) {
+//     newsX.push(new Date(trimArticles[i][0]).toLocaleDateString("en-US"))
+//     newsY.push(parseFloat(trimArticles[i][1]))
+// }
+// console.log(newsX)
+// console.log(newsY)
