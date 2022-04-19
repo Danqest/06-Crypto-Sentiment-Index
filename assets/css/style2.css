@@ -3,3 +3,10 @@
     left: 50%;
     transform: translate(-50%, 0);
 }
+.card-divider{
+    padding: 0.5rem;
+}
+
+.orbit-container{
+    height: 280px !important; 
+}

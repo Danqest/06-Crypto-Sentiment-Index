@@ -258,11 +258,11 @@ var startDtEl= document.querySelector('#start-date');
 var endDtEl= document.querySelector('#end-date');
 var startDate;
 var endDate;
-var arrayNews=[];
-var arrayStoredNews=[];
+var arrayNewsBTC=[];
+var arrayNewsETH=[];
 var inputBTC= document.querySelector('#BTC');
 var inputETH= document.querySelector('#ETH');
-var orbitSlides= document.getElementsByClassName('orbit-slide');
+var ticker;
 
 
 startDtEl.setAttribute('max',`${moment().format('YYYY-MM-DD')}`);
@@ -278,10 +278,16 @@ function getNews(evt){
   var date;
   var daysTilEnd= endDate.diff(startDate,'days');;
   console.log(daysTilEnd);
+  if(inputBTC.checked){
+    ticker='BTC';
+  } else{
+    ticker='ETH';
+  }
+  console.log(ticker);
   for (let i=0;i<=daysTilEnd;i++){ 
     date=moment(startDate,'MMDDYYYY').add(i,'days').format('MMDDYYYY')
     console.log(date)
-    newsUrl= `https://cryptonews-api.com/api/v1?tickers=BTC&items=50&page=1&date=${date}-${date}&token=mbtk43afu0okyrzuc6feftmukl2zvrujlhv9nxdv`;
+    newsUrl= `https://cryptonews-api.com/api/v1?tickers=${ticker}&items=50&page=1&date=${date}-${date}&token=mbtk43afu0okyrzuc6feftmukl2zvrujlhv9nxdv`;
     console.log(newsUrl)
     fetchUrl(newsUrl,date);   //this is comented out so we can prevent fetching the API unnecesarily
   }
@@ -321,23 +327,35 @@ function fetchUrl(url,date){
       result.numOfArti= data.data.length;
       console.log(result);
     }
-    arrayNews.push(result);
-    store(arrayNews);
+    // if(data.total_pages>1){
+    //   result.numOfArti= ((data.total_pages)-1)*50+25;
+    //   console.log(result);
+    // } else{
+    //   result.numOfArti= data.data.length;
+    //   console.log(result);
+    // }
+    if (ticker == 'BTC'){
+      arrayNewsBTC.push(result);
+      store(arrayNewsBTC);
+    } else{
+      arrayNewsETH.push(result);
+      store(arrayNewsETH);
+    }
   })
 }
 
 function store (array){
-  localStorage.setItem('historicArticles',JSON.stringify(array));
+  if (ticker == 'BTC'){
+    localStorage.setItem('historicArticlesBTC',JSON.stringify(array));
+  } else{
+    localStorage.setItem('historicArticlesETH',JSON.stringify(array));
+  }
 }
 
 
 function getStoredArticles(){
-  arrayStoredNews=(JSON.parse(localStorage.getItem('historicArticles')));
-  if (!arrayStoredNews){ //we check arrayNews because the function 'getStoredArticles' assigns all the possible values stored to that variable
-    arrayStoredNews=[]; //doing this we avoid arrayNews being equal to undefined.
-  } else{
-    populateArticles(arrayStoredNews);
-  }
+  arrayNewsBTC= JSON.parse(localStorage.getItem('historicArticlesBTC'));
+  arrayNewsETH= JSON.parse(localStorage.getItem('historicArticlesETH'));
 }
 
 function articles(date,numOfArti,arti){
@@ -353,35 +371,13 @@ function setEventListeners(){
 function init(){
   setEventListeners();
   getStoredArticles();
-}
-
-function populateArticles(array){
-  var dates=[];
-  var index=0;
-  for (let i=0;i<array.length;i++){
-    dates.push(new Date(moment(array[i].date,'MMDDYYYY').format('YYYY-MM-DD')));
+  if (!arrayNewsBTC && arrayNewsETH){ //we check arrayNews because the function 'getStoredArticles' assigns all the possible values stored to that variable
+    arrayNewsBTC=[]; //doing this we avoid arrayNews being equal to undefined.
+    //here we should add the function that generates the graphic with the Stored Data for eth
+  } else if(!arrayNewsETH && arrayNewsBTC){
+    arrayNewsETH=[];
+    // here we should add the function that generates the graphic with the Stored Data for btc
   }
-  console.log(dates);
-  var maxDate= new Date(Math.max.apply(null, dates));
-  for (let j=0;j<dates.length;j++){
-    if(dates[j].getDate === maxDate.getDate){
-      index=j;
-    }
-  }
-  console.log(index)
-
-
-  for(let i=0;i<5;i++){
-    orbitSlides[i].innerHTML=`
-      <div class="card centered-axis-x" style="width: 400px;">
-          <div class="card-divider">
-          <h6>${array[index].arti[i].title}</h6>
-          </div>
-          <div class="card-section">
-              <p>${array[index].arti[i].text} <a href=${array[index].arti[i].news_url} target:'_blank'>Read more</a></p>
-          </div>
-      </div>
-    `
 }
-}
+
 init();
