@@ -69,7 +69,12 @@ form:hover input {
     font-weight: bold;
 }
 
-.container{
-    outline-style: solid;
+.container{position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 200px;
+    margin-top: -100px; /* half of you height */
+    width: 400px;
+    margin-left: -200px; /* half of you width */
     border-style: solid;
 }
