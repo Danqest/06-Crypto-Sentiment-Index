@@ -13,78 +13,33 @@
   </head>
 <body>
 
-    <aside class='grid-x'>
-        <ul class="accordion cell large-4" data-accordion>
-            <li class="accordion-item is-active" data-accordion-item>
-              <!-- Accordion tab title -->
-              <a href="#" class="accordion-title">Ticker</a>
-          
-              <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
-              <div class="accordion-content" data-tab-content>
-                <p>Panel 1. Lorem ipsum dolor</p>
-              </div>
-            </li>
-
-            <li class="accordion-item" data-accordion-item>
-                <!-- Accordion tab title -->
-                <a href="#" class="accordion-title">Date Interval</a>
-            
-                <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
-                <div class="accordion-content " data-tab-content>
-                    <div clas='accordion-content' style="display: block;">
-                        <input type="date" style="position: relative;">
-                    </div>
+    <main>
+        <aside class='grid-x'>
+            <ul class="accordion cell large-2" data-accordion>
+                <li class="accordion-item is-active" data-accordion-item>
+                <a class="accordion-title">Ticker</a>
+                <div class="accordion-content" data-tab-content>
+                    <input type="radio" id="BTC" name="crypto" value="BTC">
+                    <label for="BTC">BTC</label><br>
+                    <input type="radio" id="ETH" name="crypto" value="ETH">
+                    <label for="ETH">ETH</label><br>
                 </div>
-              </li>
-            <!-- ... -->
-          </ul>
-          
-    </aside>
-
-
-    
-<div class="row">
-    <div class="columns">
-      <h2>Accordion</h2>
-      <p>Accordions lets you organize and navigate multiple documents in a single container. Highly useful for switching between items in the container specially when you have a large amount of content.</p>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="columns">
-      <ul class="accordion" data-accordion>
-    <li class="accordion-item is-active" data-accordion-item>
-      <a href="#" class="accordion-title">Accordion 1</a>
-      <div class="accordion-content" data-tab-content >
-        <p>Panel 1. Lorem ipsum dolor</p>
-        <a href="#">Nowhere to Go</a>
-      </div>
-    </li>
-    <li class="accordion-item" data-accordion-item>
-      <a href="#" class="accordion-title">Accordion 2</a>
-      <div class="accordion-content" data-tab-content>
-        <textarea></textarea>
-        <button class="button">I do nothing!</button>
-      </div>
-    </li>
-    <li class="accordion-item" data-accordion-item>
-      <a href="#" class="accordion-title">Accordion 3</a>
-      <div class="accordion-content" data-tab-content>
-        <div class="card align-self-middle" style="width: 300px;">
-            <div class="card-divider">
-            This is a header
-            </div>
-            <div class="card-section">
-                <h4>This is a card.</h4>
-                <p>It has an easy to override visual style, and is appropriately subdued.</p>
-                <input type="date">
-            </div>
-        </div>
-      </div>
-    </li>
-  </ul>
-    </div>
-  </div>
+                </li>
+                <li class="accordion-item" data-accordion-item>
+                    <a class="accordion-title">Date Interval</a>
+                        <div class="accordion-content " data-tab-content>
+                            <form id="form-submit">
+                                <label for="star-date">Start Date:</label>
+                                <input type="date" id="start-date" name="start date" min="2022-01-01">
+                                <label for="end-date">End Date:</label>
+                                <input type="date" id="end-date" name="end date">
+                                <button class="primary button">Submit</button>
+                            </form>
+                        </div>
+                </li>
+            </ul>
+        </aside>
+    </main>
     <div class="grid-x">
         <div class="orbit cell large-4 flex-container flex-dir-column " role="region" aria-label="Favorite Space Pictures" data-orbit data-use-m-u-i="false">
             <div class="orbit-wrapper">
@@ -94,7 +49,7 @@
                 </div>
                 <ul class="orbit-container">
                     <li class="is-active orbit-slide pos-rel">
-                        <div class="card align-self-middle" style="width: 300px;">
+                        <div class="card centered-axis-x" style="width: 300px;">
                             <div class="card-divider">
                             This is a header
                             </div>
@@ -105,7 +60,7 @@
                         </div>
                     </li>
                     <li class="orbit-slide">
-                        <div class="card" style="width: 300px;">
+                        <div class="card centered-axis-x" style="width: 300px;">
                             <div class="card-divider">
                             This is a header
                             </div>
@@ -116,7 +71,7 @@
                         </div>
                     </li>
                     <li class="orbit-slide">
-                        <div class="card" style="width: 300px;">
+                        <div class="card centered-axis-x" style="width: 300px;">
                             <div class="card-divider">
                             This is a header
                             </div>

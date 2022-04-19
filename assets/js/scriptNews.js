@@ -253,16 +253,22 @@ function getAPI() {
 
 
 
-var submitEl= document.querySelector('#submit-button');
-var startDate= moment('01012022','MMDDYYYY');//we need to bring this element from the DOM
-var endDate= moment(); //we need to bring this element from the DOM
+var submitEl= document.querySelector('#form-submit');
+var startDtEl= document.querySelector('#start-date');
+var endDtEl= document.querySelector('#end-date');
+var startDate;
+var endDate;
 var arrayNews=[];
 
+console.log(startDate);
 
 
-
-function getNews(evt){ // this needs to be invoked in an event listener for the button submit
-  // evt.preventDefault();
+function getNews(evt){
+  evt.preventDefault();
+  startDate= moment(startDtEl.value);
+  console.log(startDate);
+  endDate= moment(endDtEl.value);
+  console.log(endDate)
   var newsUrl;
   var date;
   var daysTilEnd= endDate.diff(startDate,'days');;
@@ -272,15 +278,15 @@ function getNews(evt){ // this needs to be invoked in an event listener for the 
     console.log(date)
     newsUrl= `https://cryptonews-api.com/api/v1?tickers=BTC&items=50&page=1&date=${date}-${date}&token=mbtk43afu0okyrzuc6feftmukl2zvrujlhv9nxdv`;
     console.log(newsUrl)
-    fetchUrl(newsUrl,date);   //this is comented out so we can prevent fetching the API unnecesarily
+    //fetchUrl(newsUrl,date);   //this is comented out so we can prevent fetching the API unnecesarily
   }
 }
 
 function fetchUrl(url,date){
   var result= new articles("","",'')
-  // var page= url.split('&page=');
-  // page=page[1].split('&')[0]
-  // console.log(page);
+  var page= url.split('&page=');
+  page=page[1].split('&')[0]
+  console.log(page);
   fetch(url)
   .then(function (response){
       if (response){
@@ -294,29 +300,29 @@ function fetchUrl(url,date){
     result.date=date;
     result.arti=data.data;
     // The following lines are commented out cause they bring the last page to get an accurate count on the articles for the day 
-    // if(data.total_pages>1){
-    //   newsUrl= `https://cryptonews-api.com/api/v1?tickers=BTC&items=50&page=${data.total_pages}&date=${date}-${date}&token=mbtk43afu0okyrzuc6feftmukl2zvrujlhv9nxdv`;
-    //   fetch(newsUrl)
-    //   .then(function (response){
-    //       if (response){
-    //         return response.json();
-    //       }
-    //   }).then (function (data){
-    //     console.log(data);
-    //     result.numOfArti= (data.total_pages-1)*50+data.data.length;
-    //     console.log(result.numOfArti);
-    //   });
-    // } else{
-      // result.numOfArti= data.data.length;
-      // console.log(result);
-    // }
     if(data.total_pages>1){
-      result.numOfArti= ((data.total_pages)-1)*50+25; // I added only for the last page, given the case that we have 2 or more, because is the median 
-      console.log(result);
+      newsUrl= `https://cryptonews-api.com/api/v1?tickers=BTC&items=50&page=${data.total_pages}&date=${date}-${date}&token=mbtk43afu0okyrzuc6feftmukl2zvrujlhv9nxdv`;
+      fetch(newsUrl)
+      .then(function (response){
+          if (response){
+            return response.json();
+          }
+      }).then (function (data){
+        console.log(data);
+        result.numOfArti= (data.total_pages-1)*50+data.data.length;
+        console.log(result.numOfArti);
+      });
     } else{
-      result.numOfArti= data.data.length; //In case is only one page long we get the number of articles from the length of the array
+      result.numOfArti= data.data.length;
       console.log(result);
     }
+    // if(data.total_pages>1){
+    //   result.numOfArti= ((data.total_pages)-1)*50+25;
+    //   console.log(result);
+    // } else{
+    //   result.numOfArti= data.data.length;
+    //   console.log(result);
+    // }
     arrayNews.push(result);
     store(arrayNews);
   })
@@ -342,7 +348,7 @@ function setEventListeners(){
 }
 
 function init(){
-  // setEventListeners();
+  setEventListeners();
   getStoredArticles();
   if (!arrayNews){ //we check arrayNews because the function 'getStoredArticles' assigns all the possible values stored to that variable
     arrayNews=[]; //doing this we avoid arrayNews being equal to undefined.
@@ -352,4 +358,3 @@ function init(){
 }
 
 init();
-getNews();
