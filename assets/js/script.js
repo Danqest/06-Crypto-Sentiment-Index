@@ -55,9 +55,6 @@ function getAPI() {
         }
         
         trimArticles.sort(function(a, b) {return a[0]-b[0]})
-        console.log(trimArticles)
-        console.log(trimArticles[0])
-        console.log(trimArticles[1])
       
         var trace1 = {
         x: x,
@@ -80,17 +77,23 @@ function getAPI() {
             y: newsY,
 
             mode: 'lines+markers',
+            xaxis: 'x2',
             yaxis: 'y2',
             line: {
                 color: 'blue'
             }
         }
 
-        var data = [trace1, trace2];
+        var data = [trace1, trace2]
 
         var layout = {
             showlegend: false,
-            
+            grid: {
+                rows: 2,
+                columns: 1,
+                pattern: 'independent',
+                roworder: 'top to bottom',
+            },
             xaxis: {
                 // title: 'Date',
                 rangeslider: {
@@ -101,12 +104,12 @@ function getAPI() {
                 title: 'Price',
                 autorange: 'true'
             },
+            xaxis2: {
+                matches: 'x'
+            },
             yaxis2: {
-                overlaying: 'y',
-                side: 'right',
                 title: 'Article Count',
                 color: 'blue',
-                autorange: 'true'
             },
             width: 1344,
             height: 750,
