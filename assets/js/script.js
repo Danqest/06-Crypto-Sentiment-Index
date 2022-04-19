@@ -27,7 +27,8 @@ var startDtEl= document.querySelector('#start-date');
 var endDtEl= document.querySelector('#end-date');
 var startDate;
 var endDate;
-let arrayNews=[];
+var arrayNews=[];
+var arrayNews2=[];
 
 var arrayStoredNews=[];
 var inputBTC= document.querySelector('#BTC');
@@ -54,7 +55,7 @@ function getNews(evt){
     // console.log(newsUrl)
     fetchUrl(newsUrl,date);   //this is comented out so we can prevent fetching the API unnecesarily
   }
-  startDate = moment(startDtEl.value);
+    startDate = moment(startDtEl.value);
     endDate = moment(endDtEl.value).add(1, 'days');
     var requestUrl = ('https://api.binance.com/api/v3/klines?symbol=BTCBUSD&interval=1d&startTime=' + startDate + '&endTime=' + endDate)
     fetch(requestUrl)
@@ -71,10 +72,10 @@ function getNews(evt){
             cls.push(parseFloat(data[i][4]))
         }
         
-        // arrayNews = JSON.parse(localStorage.getItem('historicArticles'));
+        // arrayNews2 = JSON.parse(localStorage.getItem('historicArticles'));
         console.log(arrayNews)
         arrayNews.sort((a,b) => a.date - b.date)
-        console.log(arrayNews)
+        console.log('SORTED', arrayNews)
 
         for (let k = 0; k < arrayNews.length; k++) {
             if (typeof(arrayNews[k].numOfArti) != 'string') {
@@ -86,7 +87,7 @@ function getNews(evt){
         console.log(trimArticles)
 
         firstDate = moment(startDate).format('MMDDYYYY')
-        lastDate = moment(endDate).format('MMDDYYYY')
+        lastDate = moment(endDate).add(1, 'days').format('MMDDYYYY')
 
         for (var j = 0; j < trimArticles.length; j++) {
             newsDate = moment(trimArticles[j].date, 'MMDDYYYY')
@@ -191,6 +192,7 @@ function fetchUrl(url,date){
       }).then (function (data){
         console.log(data);
         result.numOfArti= (data.total_pages-1)*50+data.data.length;
+        store(arrayNews);
         console.log(result);
       });
     } else{
@@ -199,7 +201,7 @@ function fetchUrl(url,date){
     }
     arrayNews.push(result);
     console.log(arrayNews)
-    store(arrayNews);
+    // store(arrayNews);
   })
 }
 
