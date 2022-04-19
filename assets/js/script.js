@@ -12,29 +12,57 @@ var opn = []
 var high = []
 var low = []
 var cls = []
-var exampleArray = []
-var arrayNews = []
 var newsX = []
 var newsY = []
-var trimArticles = []
+let newsDate
+let newsCount
+let trimArticles = []
+var trimmerArticles = []
+var firstDate
+var lastDate
+var startIndex
+var endIndex
+var submitEl= document.querySelector('#form-submit');
+var startDtEl= document.querySelector('#start-date');
+var endDtEl= document.querySelector('#end-date');
+var startDate;
+var endDate;
+let arrayNews=[];
 
-// var cryptoTicker = document.querySelector('.crypto-ticker').value
-// var timeFrame = document.querySelector('.date').value
-
-var requestUrl = 'https://api.binance.com/api/v3/klines?symbol=BTCBUSD&interval=1d&startTime=1641013200000&endTime=1650340800000'
-
-function init() {
-    // getStoredArticles()
-    getAPI()
-}
+var arrayStoredNews=[];
+var inputBTC= document.querySelector('#BTC');
+var inputETH= document.querySelector('#ETH');
+var orbitSlides= document.getElementsByClassName('orbit-slide');
 
 
-function getAPI() {
+
+startDtEl.setAttribute('max',`${moment().format('YYYY-MM-DD')}`);
+endDtEl.setAttribute('max',`${moment().format('YYYY-MM-DD')}`);
+
+function getNews(evt){
+  evt.preventDefault();
+  startDate= moment(startDtEl.value);
+  endDate= moment(endDtEl.value);
+  var newsUrl;
+  var date;
+  var daysTilEnd= endDate.diff(startDate,'days');;
+//   console.log(daysTilEnd);
+  for (let i=0;i<=daysTilEnd;i++){ 
+    date=moment(startDate,'MMDDYYYY').add(i,'days').format('MMDDYYYY')
+    // console.log(date)
+    newsUrl= `https://cryptonews-api.com/api/v1?tickers=BTC&items=50&page=1&date=${date}-${date}&token=mbtk43afu0okyrzuc6feftmukl2zvrujlhv9nxdv`;
+    // console.log(newsUrl)
+    fetchUrl(newsUrl,date);   //this is comented out so we can prevent fetching the API unnecesarily
+  }
+  startDate = moment(startDtEl.value);
+    endDate = moment(endDtEl.value).add(1, 'days');
+    var requestUrl = ('https://api.binance.com/api/v3/klines?symbol=BTCBUSD&interval=1d&startTime=' + startDate + '&endTime=' + endDate)
     fetch(requestUrl)
     .then(function (response) {
-      return response.json();
+        return response.json();
     })
     .then(function (data) {
+        
         for (var i = 0; i < data.length; i++) {
             x.push(new Date(data[i][0]).toLocaleDateString("en-US"))
             opn.push(parseFloat(data[i][1]))
@@ -43,19 +71,36 @@ function getAPI() {
             cls.push(parseFloat(data[i][4]))
         }
         
-        arrayNews = JSON.parse(localStorage.getItem('historicArticles'));
+        // arrayNews = JSON.parse(localStorage.getItem('historicArticles'));
+        console.log(arrayNews)
+        arrayNews.sort((a,b) => a.date - b.date)
+        console.log(arrayNews)
 
-
-        for (var j = 0; j < arrayNews.length; j++) {
-            var newsDate = arrayNews[j].date
-            var newsCount = arrayNews[j].numOfArti
-            newsX.push(newsDate)
-            newsY.push(newsCount)
-            trimArticles.push([newsDate, newsCount])
+        for (let k = 0; k < arrayNews.length; k++) {
+            if (typeof(arrayNews[k].numOfArti) != 'string') {
+            trimArticles.push(arrayNews[k])
+            }
         }
-        
-        trimArticles.sort(function(a, b) {return a[0]-b[0]})
-      
+        console.log(trimArticles)
+        trimArticles = trimArticles.filter((v,i,a) => a.findIndex(v2=>(v2.date===v.date))===i)
+        console.log(trimArticles)
+
+        firstDate = moment(startDate).format('MMDDYYYY')
+        lastDate = moment(endDate).format('MMDDYYYY')
+
+        for (var j = 0; j < trimArticles.length; j++) {
+            newsDate = moment(trimArticles[j].date, 'MMDDYYYY')
+            newsCount = trimArticles[j].numOfArti
+            newsX.push(newsDate._i)
+            newsY.push(newsCount)
+            trimmerArticles.push([newsDate, newsCount])
+        }
+
+        startIndex = newsX.indexOf(firstDate)
+        endIndex = newsX.indexOf(lastDate)
+        newsY = newsY.slice(startIndex, endIndex)
+        console.log(newsY)
+
         var trace1 = {
         x: x,
         close: cls,
@@ -95,7 +140,6 @@ function getAPI() {
                 roworder: 'top to bottom',
             },
             xaxis: {
-                // title: 'Date',
                 rangeslider: {
                     visible: false
                 }
@@ -116,96 +160,109 @@ function getAPI() {
         };
 
     Plotly.newPlot('myDiv', data, layout, {staticPlot:true});
-    });
-};
+    })
+}
+
+function fetchUrl(url,date){
+  var result= new articles("","",'')
+  var page= url.split('&page=');
+  page=page[1].split('&')[0]
+//   console.log(page);
+  fetch(url)
+  .then(function (response){
+      if (response){
+        return response.json();
+      }
+  }).then (function (data){
+    // console.log(data);
+    // console.log(typeof(data.total_pages));
+    // console.log(data.data.length);
+    // console.log(arrayNews);
+    result.date=date;
+    result.arti=data.data;
+    // The following lines bring the last page to get an accurate count on the articles for the day 
+    if(data.total_pages > 1){
+      newsUrl= `https://cryptonews-api.com/api/v1?tickers=BTC&items=50&page=${data.total_pages}&date=${date}-${date}&token=mbtk43afu0okyrzuc6feftmukl2zvrujlhv9nxdv`;
+      fetch(newsUrl)
+      .then(function (response){
+          if (response){
+            return response.json();
+          }
+      }).then (function (data){
+        console.log(data);
+        result.numOfArti= (data.total_pages-1)*50+data.data.length;
+        console.log(result);
+      });
+    } else{
+      result.numOfArti= data.data.length;
+      console.log(result);
+    }
+    arrayNews.push(result);
+    console.log(arrayNews)
+    store(arrayNews);
+  })
+}
 
 
 
-
-// EXAMPLE URL TO FETCH: 
-// https://api.binance.com/api/v3/klines?symbol=ETHBTC&interval=1d&startTime=1617249600000&endTime=1617854400000
-// returns an array of arrays
-// INTERVAL = EXAMPLE IS 1 DAY, DISPLAYED IN UNIX MS TIME
-// incomplete last date displays all data to the time it was called
-
-// Open Time, Open, High, Low, Close, Volume, Close Time --- Quote Asset Volume, Num of Trades, Taker Buy Base Asset Volume, Take Buy Quote Asset Volume, IGNORE
-
-// BELOW IS 4/1 TO 4/7
-
-// let exampleArray = 
-// [
-// [1617321600000,"0.03351200","0.03630000","0.03314300","0.03619000","300198.17200000",1617407999999,"10309.15126161",361393,"149152.16700000","5124.61721012","0"],
-// [1617408000000,"0.03619000","0.03626500","0.03458500","0.03520900","271274.39700000",1617494399999,"9608.31598544",319925,"138316.27700000","4899.94038079","0"],
-// [1617494400000,"0.03520400","0.03596100","0.03491900","0.03566900","186558.86000000",1617580799999,"6620.49334391",229410,"93017.51700000","3301.23637700","0"],
-// [1617580800000,"0.03566800","0.03610500","0.03521000","0.03563700","230293.70800000",1617667199999,"8207.89357751",312027,"110438.30500000","3936.37862681","0"],
-// [1617667200000,"0.03564100","0.03660500","0.03560800","0.03641500","235222.68600000",1617753599999,"8498.17194028",326595,"113119.83200000","4086.89736999","0"],
-// [1617753600000,"0.03641900","0.03659100","0.03470800","0.03509400","248961.59800000",1617839999999,"8852.94185430",360125,"118137.38200000","4202.26530036","0"],
-// [1617840000000,"0.03508000","0.03593000","0.03497000","0.03581600","186761.61700000",1617926399999,"6625.87315253",233037,"89840.86000000","3187.35728312","0"]
-// ]
+function store(array){
+  localStorage.setItem('historicArticles',JSON.stringify(array));
+}
 
 
+function getStoredArticles(){
+  arrayStoredNews=(JSON.parse(localStorage.getItem('historicArticles')));
+  if (!arrayStoredNews){ //we check arrayNews because the function 'getStoredArticles' assigns all the possible values stored to that variable
+    arrayStoredNews=[]; //doing this we avoid arrayNews being equal to undefined.
+  } else{
+    populateArticles(arrayStoredNews);
+  }
+}
 
-// function buildArrays(exampleArray) {
-//     for (let i = 0; i < exampleArray.length; i++) {
-//         x.push(new Date(exampleArray[i][0]).toLocaleDateString("en-US"))
-//         opn.push(parseFloat(exampleArray[i][1]))
-//         high.push(parseFloat(exampleArray[i][2]))
-//         low.push(parseFloat(exampleArray[i][3]))
-//         cls.push(parseFloat(exampleArray[i][4]))
-//     }
-//     console.log(x)
-//     console.log(opn)
-//     console.log(high)
-//     console.log(low)
-//     console.log(cls)
-//     console.log(exampleArray)
-// }
+function articles(date,numOfArti,arti){
+  this.date= date;
+  this.numOfArti= numOfArti;
+  this.arti=arti;
+}
 
+function setEventListeners(){
+  submitEl.addEventListener('submit',getNews)
+}
 
-// console.log(x)
-// console.log(opn)
-// console.log(high)
-// console.log(low)
-// console.log(cls)
-// console.log(exampleArray)
+function init(){
+  setEventListeners();
+  getStoredArticles();
+}
 
-// function getStoredArticles(){
-//     arrayNews = JSON.parse(localStorage.getItem('historicArticles'));
-//   }
-
-
-// arrayNews = JSON.parse(localStorage.getItem('historicArticles'));
-
-
-// for (var i = 0; i < arrayNews.length; i++) {
-//     var dataDate = arrayNews[i].date
-//     var dataCount = arrayNews[i].numOfArti
-//     trimArticles.push([dataDate, dataCount])
-// }
-// trimArticles = trimArticles.sort(function(a, b){return a[0]-b[0]})
-
+function populateArticles(array){
+  var dates=[];
+  var index=0;
+  for (let i=0;i<array.length;i++){
+    dates.push(new Date(moment(array[i].date,'MMDDYYYY').format('YYYY-MM-DD')));
+  }
+//   console.log(dates);
+  var maxDate= new Date(Math.max.apply(null, dates));
+  for (let j=0;j<dates.length;j++){
+    if(dates[j].getDate === maxDate.getDate){
+      index=j;
+    }
+  }
+//   console.log(index)
 
 
-// console.log(trimArticles)
+  for(let i=0;i<5;i++){
+    orbitSlides[i].innerHTML=`
+      <div class="card centered-axis-x" style="width: 400px;">
+          <div class="card-divider">
+          <h6>${array[index].arti[i].title}</h6>
+          </div>
+          <div class="card-section">
+              <p>${array[index].arti[i].text} <a href=${array[index].arti[i].news_url} target:'_blank'>Read more</a></p>
+          </div>
+      </div>
+    `
+}
+}
+init();
 
-init()
-<<<<<<< HEAD
-<<<<<<< HEAD
-// buildArrays()
-||||||| merged common ancestors
-// buildArrays()
->>>>>>>>> Temporary merge branch 2
-=======
-// buildArrays()
->>>>>>> 43c80ec34121e975b9787443fb94389d1828499c
-||||||| 43c80ec
-// buildArrays()
-=======
 
-// for (let i = 0; i < trimArticles.length; i++) {
-//     newsX.push(new Date(trimArticles[i][0]).toLocaleDateString("en-US"))
-//     newsY.push(parseFloat(trimArticles[i][1]))
-// }
-// console.log(newsX)
-// console.log(newsY)
->>>>>>> 2e01ba9f13b6f5a9048517e028ba943fc441912a

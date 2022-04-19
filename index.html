@@ -4,76 +4,13 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Crypto Sentimental Index</title>
+        <title>Crypto Sentimental Homepage</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <script src='https://cdn.plot.ly/plotly-2.11.1.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+        <script src="./assets/js/script.js"></script>
     </head>
 <body>
-=========
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Sentimental Index</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <script src='https://cdn.plot.ly/plotly-2.11.1.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
-    <script src="./assets/js/script.js"></script>
-</head>
-<<<<<<< HEAD
-<body>
-    <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crypto Sentimental Index</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <script src="https://cdn.plot.ly/plotly-2.11.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    <script src="./assets/js/script.js"></script>
->>>>>>> 43c80ec34121e975b9787443fb94389d1828499c
-  </head>
-||||||| 43c80ec
-<body>
-    <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crypto Sentimental Index</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-      />
-    />
-    <script src="https://cdn.plot.ly/plotly-2.11.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    <script src="./assets/js/script.js"></script>
-  </head>
-=======
-
->>>>>>> 2e01ba9f13b6f5a9048517e028ba943fc441912a
-||||||| 2e61d97
-=======
-</head>
->>>>>>> beb231cb01c9137a0bb3b90f2c299b0b321b8a3b
-  <body class="has-background-white">
-<<<<<<< HEAD
-    <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
-||||||| merged common ancestors
-    <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
->>>>>>>>> Temporary merge branch 2
-=======
-    <div class="container" id="myDiv">
-      <!-- Plotly chart will be drawn inside this DIV -->
-    </div>
->>>>>>> 43c80ec34121e975b9787443fb94389d1828499c
     <!--Headings with popular crypto and tagnames(LANDING PAGE)-->
     <section class="hero is-medium is-black">
       <div class="hero-head">
@@ -133,7 +70,7 @@
           <div class="tile is-parent">
             <article class="tile is-child box notification is-black">
               <figure class="image is-4by3">
-                <img src="cryptopic2.jpg" alt="">
+                <img src="./assets/images/cryptopic2.jpg" alt="">
               </figure>
             </article>
           </div>
@@ -178,7 +115,7 @@
           <article class="tile is-child box notification is-black">
             <p class="is-family-monospace has-text-centered">Bitcoin(BTC)</p>
             <figure class="image is-3by1">
-              <a href="https://en.wikipedia.org/wiki/Bitcoin"><img class="is-rounded" src="BTCpic.jpg">
+              <a href="https://en.wikipedia.org/wiki/Bitcoin"><img class="is-rounded" src="./assets/images/BTCpic.jpg">
                 <figcaption class="has-text-centered">learn more</figcaption>
             </figure>
           </article>
@@ -187,7 +124,7 @@
           <article class="tile is-child box notification is-black">
             <p class="is-family-monospace has-text-centered">Ethereum(ETH)</p>
             <figure class="image is-3by1">
-              <a href="https://en.wikipedia.org/wiki/Ethereum"><img class="is-rounded" src="ETHpic.jpg">
+              <a href="https://en.wikipedia.org/wiki/Ethereum"><img class="is-rounded" src="./assets/images/ETHpic.jpg">
                 <figcaption class="has-text-centered">learn more</figcaption>
               </figure>
           </article>
@@ -196,7 +133,7 @@
           <article class="tile is-child box notification is-black">
             <p class="is-family-monospace has-text-centered">Tether(USDT)</p>
             <figure class="image is-3by1">
-              <a href="https://en.wikipedia.org/wiki/Tether_(cryptocurrency)"><img class="is-rounded" src="tetherpic.jpg">
+              <a href="https://en.wikipedia.org/wiki/Tether_(cryptocurrency)"><img class="is-rounded" src="./assets/images/tetherpic.jpg">
                 <figcaption class="has-text-centered">learn more</figcaption>
               </figure>
           </article>
@@ -205,7 +142,7 @@
           <article class="tile is-child box notification is-black">
             <p class="is-family-monospace has-text-centered">Binance Coin(BNB)</p>
             <figure class="image is-3by1">
-              <a href="https://en.wikipedia.org/wiki/Binance"><img class="is-rounded" src="bnbpic.png">
+              <a href="https://en.wikipedia.org/wiki/Binance"><img class="is-rounded" src="./assets/images/bnbpic.png">
                 <figcaption class="has-text-centered">learn more</figcaption>
               </figure>
           </article>
@@ -214,7 +151,7 @@
           <article class="tile is-child box notification is-black">
             <p class="is-family-monospace has-text-centered">USD Coin(USDC)</p>
             <figure class="image is-3by1">
-              <a href="https://en.wikipedia.org/wiki/USD_Coin"><img class="is-rounded" src="usdcpic.png">
+              <a href="https://en.wikipedia.org/wiki/USD_Coin"><img class="is-rounded" src="./assets/images/usdcpic.png">
                 <figcaption class="has-text-centered">learn more</figcaption>
               </figure>
           </article>

@@ -1,40 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Crypto Graph</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-        <link rel="stylesheet" href="./assets/css/style.css">
-    </head>
-<body>
-    <div class="container" id="test"> 
-        <h2>your container title here</h2>
-        <p><strong>Your text here</strong></p>
-        <p> Another text : - Grape silver beet collard
-         greens avocado quandong fennel gumbo black-eyed 
-        pea watercress potato tigernut corn groundnut.
-         Chickweed okra pea winter purslane
-        coriander yarrow sweet pepper radish garlic
-         brussels sprout groundnut summer purslane
-         earthnut pea tomato spring onion azuki bean gourd.
-          Gumbo kakadu plum komatsuna
-         black-eyed pea green bean zucchini gourd
-          winter purslane silver beet rock melon
-         radish asparagus spinach. - </p>
-         <!-- end container div class --> </div>
-
-    
-
-
-    
-
-
-
-   
-
-
-
-</body>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto Sentiment Chart</title>
+    <link
+      rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src='https://cdn.plot.ly/plotly-2.11.1.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+    <!-- <script src="./assets/js/script.js"></script> -->
+    <link rel="stylesheet" href="./assets/css/foundation.css" />
+    <link rel="stylesheet" href="./assets/css/app.css" />
+    <!-- <link rel="stylesheet" href="./assets/css/style2.css"> -->
+  </head>
+  <body>
+    <section class="hero is-medium is-black">
+        <div class="hero-head">
+          <p class="title is-family-monospace has-text-centered has-text-weight-bold is-size-1">
+            MARKET SENTIMENT
+          </p>
+        </div>
+      </section>
+    <main class="grid-x">
+      <div class="cell medium-2 small-cell-block-y">
+        <ul class="accordion cell large-2" data-accordion>
+          <li class="accordion-item is-active" data-accordion-item>
+            <a class="accordion-title">Ticker</a>
+            <div class="accordion-content" data-tab-content>
+              <input type="radio" id="BTC" name="crypto" value="BTC" />
+                <label for="BTC">BTC</label><br />
+              <input type="radio" id="ETH" name="crypto" value="ETH" />
+                <label for="ETH">ETH (Future Functionality)</label><br />
+              <input type="radio" id="DOGE" name="crypto" value="DOGE" />
+                <label for="DOGE">DOGE (Future Functionality)</label><br />
+              <input type="radio" id="BNB" name="crypto" value="BNB" />
+                <label for="ETH">BNB (Future Functionality)</label><br />
+            </div>
+          </li>
+          <li class="accordion-item" data-accordion-item>
+            <a class="accordion-title">Date Interval</a>
+            <div class="accordion-content" data-tab-content>
+              <form id="form-submit">
+                <label for="star-date">Start Date:</label>
+                <input
+                  type="date"
+                  id="start-date"
+                  name="start date"
+                  min="2022-01-01"
+                />
+                <label for="end-date">End Date:</label>
+                <input
+                  type="date"
+                  id="end-date"
+                  name="end date"
+                  min="2022-01-01"
+                />
+                <button class="primary button">Submit</button>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="grid-x grid-margin-x">
+        <div class="cell large-offset-2" id="myDiv">
+          <!-- Plotly chart will be drawn inside this DIV -->
+        </div>
+      </div>
+    </main>
+    <center>
+      <div class="grid-container">
+          <div class="orbit cell large-4 flex-container flex-dir-column " role="region" data-orbit data-use-m-u-i="false">
+              <div class="orbit-wrapper">
+                  <div class="orbit-controls">
+                      <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+                      <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+                  </div>
+                  <div>
+                  <ul class="orbit-container" style="height: 280px;">
+                      <li class="is-active orbit-slide">
+                  
+                      </li>
+                      <li class="orbit-slide">
+                          <div class="card centered-axis-x" style="width: 300px;">
+                              
+                          </div>
+                      </li>
+                      <li class="orbit-slide">
+                  
+                      </li>
+                      <li class="orbit-slide">
+                  
+                      </li>
+                      <li class="orbit-slide">
+                          <div class="card centered-axis-x" style="height: 275px; display: none;">
+                              <div class="card-divider">
+                              This is a header
+                              </div>
+                              <div class="card-section">
+                                  <h4>This is a card.</h4>
+                                  <p>It has an easy to override visual style, and is appropriately subdued.</p>
+                              </div>
+                          </div>
+                      </li>
+                      
+                  </ul>
+              </div>
+              <nav class="orbit-bullets">
+                  <button class="is-active" data-slide="0">
+                      <span class="show-for-sr">First slide details.</span>
+                      <span class="show-for-sr" data-slide-active-label>Current Slide</span>
+                  </button>
+                  <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+                  <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+                  <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+                  <button data-slide="4"><span class="show-for-sr">Fifth slide details.</span></button>
+              </nav>
+        
+          </div>
+      </div>
+   </center>
+  </body>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="./assets/js/vendor/jquery.js"></script>
+  <script src="./assets/js/vendor/what-input.js"></script>
+  <script src="./assets/js/vendor/foundation.js"></script>
+  <script src="./assets/js/vendor/app.js"></script>
+  <!-- <script src="./assets/js/scriptNews.js"></script> -->
+  <script src="./assets/js/script.js"></script>
+  <script src='https://cdn.plot.ly/plotly-2.11.1.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
 </html>
